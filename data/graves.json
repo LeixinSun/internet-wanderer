@@ -1,0 +1,11 @@
+{
+  "graves": [
+    { "name": "Google Reader", "years": "2005 – 2013", "epitaph": "被自家主人关停。百万 RSS 读者至今没有原谅 Google。", "fresh": false },
+    { "name": "虾米音乐", "years": "2006 – 2021", "epitaph": "中国乐迷的耶路撒冷。被收购、被冷落、被关停。", "fresh": false },
+    { "name": "天涯社区", "years": "1999 – 2023", "epitaph": "一代中文网民的广场。最后死于欠费停机。", "fresh": false },
+    { "name": "猫扑", "years": "1997 – 2021", "epitaph": "「233」「人肉搜索」的出生地。中文互联网的青春期埋葬于此。", "fresh": false },
+    { "name": "落网", "years": "2003 – 2016", "epitaph": "中文独立音乐的耳朵。死于寂静，连讣告都没几个人看到。", "fresh": false },
+    { "name": "濒危声音博物馆", "years": "？ – 2026 · 域名失守", "epitaph": "收藏拨号音与开机声的博物馆。今天去敲门，开门的是一家赌场广告——博物馆自己也成了濒危品。", "fresh": true }
+  ],
+  "missing": "另：今日漫游途中另确认两起失踪——Clive Thompson 的「怪书发现器」（weirdoldbookfinder.com，域名解析已消失）、中国妖怪数据库「知妖」（cbaike.com，域名已易主为一个营销百科）。互联网不办葬礼，失踪人口只能记在这里。"
+}
