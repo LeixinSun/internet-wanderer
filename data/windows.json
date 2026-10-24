@@ -6,7 +6,7 @@
     "host": "astronaut.io",
     "blurb": "按下 GO，随机降落在某个地球人几乎零播放量的视频里：DSC_1234、IMG_4321，无剪辑、无标题、无人观看——除了你。互联网时代的平民史诗。",
     "anchor": { "lat": 0, "lon": -160, "label": "太平洋正中 · 锚点是整个地球（随机降落）" },
-    "verified": "2026-10-23"
+    "verified": "2026-10-24"
   },
   {
     "id": "solar-lowtech",
@@ -15,7 +15,7 @@
     "host": "solar.lowtechmagazine.com",
     "blurb": "一个架在巴塞罗那屋顶一块太阳能板上的网站：阴天它会下线。原来网站也可以有自己的天气——互联网并不住在云里，它住在屋顶上。",
     "anchor": { "lat": 41.39, "lon": 2.17, "label": "巴塞罗那 · 那块太阳能板所在的城市" },
-    "verified": "2026-10-23"
+    "verified": "2026-10-24"
   },
   {
     "id": "everynoise",
@@ -24,7 +24,7 @@
     "host": "everynoise.com",
     "blurb": "一个人花十几年绘制的 6,000+ 种音乐流派地图：从 drift phonk 到云南传统音乐，挨个点，全都能听。人类听觉的物种多样性图鉴。",
     "anchor": { "lat": 42.39, "lon": -71.1, "label": "马萨诸塞 · Glenn McDonald 工作的地方" },
-    "verified": "2026-10-23"
+    "verified": "2026-10-24"
   },
   {
     "id": "milliondollar",
@@ -33,16 +33,16 @@
     "host": "milliondollarhomepage.com",
     "blurb": "2005 年的时间胶囊：一个大学生把首页切成一百万个像素、一美元一格卖广告凑学费。二十年后它是互联网的广告牌废墟与链接坟场——而它自己还活着。",
     "anchor": { "lat": 51.75, "lon": -1.25, "label": "英格兰 · Alex Tew 的家乡" },
-    "verified": "2026-10-23"
+    "verified": "2026-10-24"
   },
   {
     "id": "foreverblog",
     "name": "十年之约",
     "url": "https://www.foreverblog.cn",
     "host": "foreverblog.cn",
-    "blurb": "一群中文博客主约定写满十年，每篇下面标着「在约第几年」。编辑每天替你挑几篇不为流量写的文章——创刊今天出到第 18 期。「虫洞」可随机降落到一个还在更新的博客。",
+    "blurb": "一群中文博客主约定写满十年，每篇下面标着「在约第几年」。编辑每天替你挑几篇不为流量写的文章——本刊今天出到第 19 期。「虫洞」可随机降落到一个还在更新的博客。",
     "anchor": { "lat": 34.75, "lon": 113.62, "label": "中原 · 中文独立博客圈" },
-    "verified": "2026-10-23"
+    "verified": "2026-10-24"
   },
   {
     "id": "souyun",
@@ -51,7 +51,7 @@
     "host": "sou-yun.cn",
     "blurb": "千年诗词的搜索引擎：查任何一个字在历代诗里出现的位置，还有唐宋诗人的行踪地图——跟着杜甫，把他走过的路再走一遍。",
     "anchor": { "lat": 34.34, "lon": 108.94, "label": "长安（西安） · 唐诗的故乡" },
-    "verified": "2026-10-23"
+    "verified": "2026-10-24"
   },
   {
     "id": "hatnote",
@@ -60,7 +60,7 @@
     "host": "listen.hatnote.com",
     "blurb": "把维基百科的实时编辑变成音乐：增是铃，减是弦，编辑越大音越低。戴耳机听五分钟——那是人类知识的心跳声。可选中文维基。",
     "anchor": { "lat": 37.77, "lon": -122.42, "label": "旧金山 · Hatnote 所在的城市" },
-    "verified": "2026-10-23"
+    "verified": "2026-10-24"
   },
   {
     "id": "submarinecable",
@@ -69,6 +69,78 @@
     "host": "submarinecablemap.com",
     "blurb": "互联网的物理真身：550 多条光缆躺在海底，跨越所有大洋。你发出去的每条消息，都曾见过鲸鱼。",
     "anchor": { "lat": 38.9, "lon": -77.04, "label": "华盛顿 · TeleGeography 总部" },
-    "verified": "2026-10-23"
+    "verified": "2026-10-24"
+  },
+  {
+    "id": "shuge",
+    "name": "书格",
+    "url": "https://www.shuge.org",
+    "host": "shuge.org",
+    "blurb": "「完全开放」的古籍善本数字图书馆：761 套精挑细选的珍稀书籍字画，高清到能看清元人画里的笔触。没有围墙，没有会员费。",
+    "anchor": { "lat": 30.27, "lon": 120.15, "label": "杭州 · 千年古籍的数字化书房" },
+    "verified": "2026-10-24"
+  },
+  {
+    "id": "phonemica",
+    "name": "乡音苑 Phonemica",
+    "url": "https://phonemica.net",
+    "host": "phonemica.net",
+    "blurb": "一幅用声音绘制的中国方言地图：点开任何地方，听当地人用乡音讲自己的故事。2011 年开张，上个月还有人上传新的故事。",
+    "anchor": { "lat": 30.59, "lon": 114.31, "label": "华中 · 全中国乡音的录音棚" },
+    "verified": "2026-10-24"
+  },
+  {
+    "id": "hanziyuan",
+    "name": "汉字叔叔",
+    "url": "https://hanziyuan.net",
+    "host": "hanziyuan.net",
+    "blurb": "一个美国人 1994 年起自费给 96,000 个古汉字建档案：甲骨文、金文、篆字的演变全部可查。无广告，靠捐款活着，二十五年了。",
+    "anchor": { "lat": 39.9, "lon": 116.4, "label": "北京 · Richard Sears 的书桌" },
+    "verified": "2026-10-24"
+  },
+  {
+    "id": "zhongguose",
+    "name": "中国色",
+    "url": "http://zhongguose.com",
+    "host": "zhongguose.com",
+    "blurb": "几百种中国传统色的色谱：胭脂、天水碧、远山如黛。每一种颜色都有一个比 RGB 编号好听一百倍的名字。",
+    "anchor": { "lat": 26.65, "lon": 106.63, "label": "贵州 · 一个人的传统色数据库" },
+    "verified": "2026-10-24"
+  },
+  {
+    "id": "zoomquilt",
+    "name": "Zoomquilt",
+    "url": "https://zoomquilt.org",
+    "host": "zoomquilt.org",
+    "blurb": "2004 年的无限变焦油画：画面永远往深处钻，没有尽头。它来自那个艺术家们在互联网上接力作画的年代，至今仍在那里转。",
+    "anchor": { "lat": 52.52, "lon": 13.4, "label": "柏林 · Nikolaus Baumgarten 的画室" },
+    "verified": "2026-10-24"
+  },
+  {
+    "id": "webamp-skins",
+    "name": "Winamp Skin Museum",
+    "url": "https://skins.webamp.org",
+    "host": "skins.webamp.org",
+    "blurb": "131,530 个 Winamp 皮肤无限滚动，每一个都能在浏览器里真的跑起来。一代人的桌面审美，被一个人收进了博物馆。",
+    "anchor": { "lat": 37.4, "lon": -122.1, "label": "加州 · @captbaritone 的博物馆" },
+    "verified": "2026-10-24"
+  },
+  {
+    "id": "dsn-now",
+    "name": "DSN Now 深空网络",
+    "url": "https://eyes.nasa.gov/dsn/dsn.html",
+    "host": "eyes.nasa.gov/dsn",
+    "blurb": "此刻，哪台天线正在和哪艘深空探测器说话？NASA 深空网络的实时状态：信号往返要多少分钟、数据流有多快，全是现在进行时。",
+    "anchor": { "lat": 34.2, "lon": -118.17, "label": "帕萨迪纳 · NASA 喷气推进实验室" },
+    "verified": "2026-10-24"
+  },
+  {
+    "id": "lightyear",
+    "name": "Lightyear.fm",
+    "url": "http://lightyear.fm",
+    "host": "lightyear.fm",
+    "blurb": "电台广播以光速离开地球。往外滚一光年，听到的是去年的歌；滚到一百光年外，是 1926 年的爵士。一趟太空、时间与音乐的旅行。",
+    "anchor": { "lat": 40.71, "lon": -74.0, "label": "纽约 · 一个关于电波旅行的点子" },
+    "verified": "2026-10-24"
   }
 ]
