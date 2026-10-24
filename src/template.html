@@ -9,8 +9,7 @@
   :root {
     --ink: #0d1117;
     --ink-2: #131a24;
-    --land: #1b2534;
-    --grid: #1f2a3a;
+    --grid: #243349;
     --paper: #e9e1cf;
     --paper-dim: #9b937f;
     --gold: #e8b34b;
@@ -85,57 +84,90 @@
   .sec-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-soft), transparent); }
   .sec-note { color: var(--paper-dim); font-size: .85rem; margin-bottom: 30px; }
 
-  /* ---------- 夜航图 ---------- */
-  .atlas-wrap {
-    position: relative;
-    background: linear-gradient(180deg, #0b0f16, #0e1420);
-    border: 1px solid rgba(233,225,207,.09); border-radius: 14px;
-    padding: 18px; overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,.5), inset 0 0 120px rgba(10,14,22,.8);
+  /* ---------- 夜航图（全景出血） ---------- */
+  .atlas-bleed { width: 100vw; margin-left: calc(50% - 50vw); }
+  .atlas-wrap { max-width: 1760px; margin: 0 auto; padding: 0 22px; }
+  .atlas-frame {
+    position: relative; overflow: hidden;
+    background: #060a11;
+    border: 1px solid rgba(233,225,207,.10); border-radius: 20px;
+    box-shadow: 0 40px 120px rgba(0,0,0,.6);
   }
-  .atlas-wrap::before { /* 微星 */
-    content: ""; position: absolute; inset: 0; opacity: .5; pointer-events: none;
+  .atlas-frame::before { /* 框外深空里的微星 */
+    content: ""; position: absolute; inset: 0; opacity: .6; pointer-events: none;
     background-image:
-      radial-gradient(1px 1px at 12% 22%, rgba(233,225,207,.5), transparent),
-      radial-gradient(1px 1px at 34% 68%, rgba(233,225,207,.35), transparent),
-      radial-gradient(1.5px 1.5px at 57% 15%, rgba(232,179,75,.5), transparent),
-      radial-gradient(1px 1px at 71% 55%, rgba(233,225,207,.3), transparent),
-      radial-gradient(1px 1px at 88% 30%, rgba(233,225,207,.45), transparent),
-      radial-gradient(1.5px 1.5px at 46% 85%, rgba(233,225,207,.3), transparent);
+      radial-gradient(1px 1px at 4% 12%, rgba(233,225,207,.5), transparent),
+      radial-gradient(1px 1px at 9% 78%, rgba(233,225,207,.3), transparent),
+      radial-gradient(1.5px 1.5px at 96% 22%, rgba(232,179,75,.4), transparent),
+      radial-gradient(1px 1px at 92% 84%, rgba(233,225,207,.4), transparent),
+      radial-gradient(1px 1px at 14% 42%, rgba(233,225,207,.25), transparent),
+      radial-gradient(1px 1px at 86% 8%, rgba(233,225,207,.35), transparent);
   }
-  svg#atlas { display: block; width: 100%; height: auto; }
-  .land { fill: var(--land); stroke: #2a3648; stroke-width: .6; }
-  .grid { fill: none; stroke: var(--grid); stroke-width: .4; stroke-dasharray: 2 4; }
+  .atlas-frame::after { /* 暗角 */
+    content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; border-radius: 20px;
+    box-shadow: inset 0 0 130px rgba(3,6,10,.85);
+  }
+  .atlas-scroll { overflow-x: auto; scrollbar-width: none; }
+  .atlas-scroll::-webkit-scrollbar { display: none; }
+  svg#atlasSvg { display: block; width: 100%; min-width: 980px; height: auto; }
 
-  .mk { cursor: pointer; opacity: 0; animation: mkIn .5s cubic-bezier(.34,1.56,.64,1) forwards; }
+  .ocean { fill: url(#oceanGrad); }
+  .frame-line { fill: none; stroke: rgba(232,179,75,.30); stroke-width: 1.1; }
+  .land { fill: url(#landGrad); stroke: #3a4966; stroke-width: .7; }
+  .grid { fill: none; stroke: var(--grid); stroke-width: .5; opacity: .55; }
+
+  .atlas-cap {
+    position: absolute; right: 18px; bottom: 12px; z-index: 5; pointer-events: none;
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .14em; color: rgba(233,225,207,.42);
+  }
+
+  .mk { cursor: pointer; opacity: 0; animation: mkIn .5s cubic-bezier(.34,1.56,.64,1) forwards; outline: none; }
   @keyframes mkIn { from { opacity: 0 } to { opacity: 1 } }
   .mk .core { fill: var(--gold); filter: drop-shadow(0 0 5px var(--gold)); }
   .mk .halo { fill: none; stroke: var(--gold); stroke-width: 1.2; opacity: 0; animation: halo 3.2s ease-out infinite; }
   @keyframes halo { 0% { opacity: .55 } 80%,100% { opacity: 0 } }
   .mk .hit { fill: transparent; }
-  .mk text { fill: var(--paper-dim); font-size: 11px; font-family: var(--serif); opacity: 0; transition: opacity .25s; pointer-events: none; }
+  .mk .flare {
+    fill: none; stroke: var(--gold); stroke-width: 1.4; opacity: 0;
+    transform-box: fill-box; transform-origin: center;
+  }
+  .mk.flashing .flare { animation: flareOut 1.1s ease-out 2; }
+  @keyframes flareOut { 0% { opacity: .85; transform: scale(.5); } 100% { opacity: 0; transform: scale(4.2); } }
+  .mk .num {
+    fill: rgba(233,225,207,.62); font: italic 9.5px Georgia, serif;
+    pointer-events: none;
+  }
+  .mk .lbl {
+    fill: #f0e9d8; font-size: 13px; font-family: var(--kai); letter-spacing: .08em;
+    text-anchor: middle; opacity: 0; transition: opacity .25s; pointer-events: none;
+    paint-order: stroke; stroke: rgba(7,11,18,.92); stroke-width: 3.5px;
+  }
+  .mk:hover .lbl, .mk:focus .lbl, .mk.cur .lbl { opacity: 1; }
 
   .mcard {
-    position: absolute; z-index: 5; width: min(280px, 78vw);
-    background: rgba(19, 26, 36, .96);
-    border: 1px solid var(--gold-soft); border-radius: 10px;
+    position: absolute; z-index: 7; width: min(300px, 82vw);
+    left: 0; top: 0;
+    background: rgba(17, 24, 35, .97);
+    border: 1px solid var(--gold-soft); border-radius: 12px;
     padding: 16px 18px 14px;
-    box-shadow: 0 16px 50px rgba(0,0,0,.6), 0 0 30px rgba(232,179,75,.08);
+    box-shadow: 0 18px 55px rgba(0,0,0,.65), 0 0 34px rgba(232,179,75,.08);
     opacity: 0; pointer-events: none;
-    transform: translate(-50%, calc(-100% - 16px)) scale(.94);
+    transform: translateY(10px) scale(.95);
     transform-origin: 50% 100%;
-    transition: opacity .22s ease, transform .28s cubic-bezier(.34,1.56,.64,1);
+    transition: opacity .2s ease, transform .26s cubic-bezier(.34,1.56,.64,1);
   }
-  .mcard.show { opacity: 1; pointer-events: auto; transform: translate(-50%, calc(-100% - 16px)) scale(1); }
-  .mcard.below { transform: translate(-50%, 16px) scale(.94); transform-origin: 50% 0%; }
-  .mcard.below.show { transform: translate(-50%, 16px) scale(1); }
-  .mcard::after { /* 指向窗的针 */
-    content: ""; position: absolute; left: 50%; bottom: -6px; width: 10px; height: 10px;
+  .mcard.show { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+  .mcard.below { transform: translateY(-10px) scale(.95); transform-origin: 50% 0%; }
+  .mcard.below.show { transform: translateY(0) scale(1); }
+  .mcard::after { /* 指向窗的针，--ax 由 JS 对准窗心 */
+    content: ""; position: absolute; left: var(--ax, 50%); bottom: -6px; width: 10px; height: 10px;
+    margin-left: -5px;
     background: inherit; border-right: 1px solid var(--gold-soft); border-bottom: 1px solid var(--gold-soft);
-    transform: translateX(-50%) rotate(45deg);
+    transform: rotate(45deg);
   }
   .mcard.below::after { bottom: auto; top: -6px; border: 0; border-left: 1px solid var(--gold-soft); border-top: 1px solid var(--gold-soft); }
   .mcard h3 { font-size: 1.02rem; margin-bottom: 2px; }
+  .mcard h3 .no { font: italic .78rem Georgia, serif; color: var(--gold); margin-right: 8px; letter-spacing: .06em; }
   .mcard .host { font-family: var(--mono); font-size: .72rem; color: var(--paper-dim); margin-bottom: 8px; }
   .mcard p { font-size: .84rem; line-height: 1.75; opacity: .9; margin-bottom: 10px; }
   .mcard .anchor { font-size: .76rem; color: var(--paper-dim); margin-bottom: 10px; }
@@ -166,6 +198,8 @@
   .entry__host { font-family: var(--mono); font-size: .74rem; color: var(--paper-dim); margin: 4px 0 10px; }
   .entry__body p { font-size: .95rem; opacity: .9; }
   .entry__meta { margin-top: 10px; font-size: .78rem; color: var(--paper-dim); }
+  .entry__loc { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-soft); }
+  .entry__loc:hover { border-bottom-color: var(--gold); }
 
   /* ---------- 讣告墙 ---------- */
   .tombs { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 24px; }
@@ -215,6 +249,9 @@
 
   @media (max-width: 640px) {
     main { padding: 56px 18px 48px; }
+    .atlas-wrap { padding: 0 12px; }
+    .atlas-frame { border-radius: 14px; }
+    .atlas-cap { display: none; }
     .entry { gap: 16px; }
     .entry--offset { margin-left: 0; }
     .entry__no { font-size: 2rem; min-width: 46px; }
@@ -242,18 +279,39 @@
 
   <section id="atlas">
     <div class="sec-title">夜航图 · The Atlas</div>
-    <div class="sec-note">锚点 = 这扇窗与地球的连接处（创作者、主题或精神的所在地）。把光标放上去，看每扇窗的卡片。</div>
-    <div class="atlas-wrap">
-      <svg id="atlas" viewBox="0 0 1000 500" role="img" aria-label="世界地图上的互联网秘境">
-        <path class="grid" d="__MAP_GRID__"/>
-        <path class="land" d="__MAP_LAND__"/>
-        <g id="markers"></g>
-      </svg>
-      <div class="mcard" id="mcard"></div>
-    </div>
-    <div class="atlas-legend">
-      <span><span class="dot"></span>今夜亮着的窗（验证日期见各窗卡片）</span>
-      <span>地图数据：Natural Earth（公有领域）· 等距圆柱投影</span>
+    <div class="sec-note">锚点 = 这扇窗与地球的连接处（创作者、主题或精神的所在地）。悬停看卡片，点按钉住；窗的编号对应下方「秘境名录」。</div>
+    <div class="atlas-bleed">
+      <div class="atlas-wrap">
+        <div class="atlas-frame" id="atlasFrame">
+          <div class="atlas-scroll" id="atlasScroll">
+            <svg id="atlasSvg" viewBox="0 0 1600 820" role="img" aria-label="世界地图上的互联网秘境">
+              <defs>
+                <radialGradient id="oceanGrad" cx="50%" cy="40%" r="78%">
+                  <stop offset="0%" stop-color="#132238"/>
+                  <stop offset="55%" stop-color="#0d1728"/>
+                  <stop offset="100%" stop-color="#080d17"/>
+                </radialGradient>
+                <linearGradient id="landGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#233047"/>
+                  <stop offset="100%" stop-color="#161e2d"/>
+                </linearGradient>
+              </defs>
+              <path class="ocean" d="__MAP_FRAME__"/>
+              <g class="stars">__MAP_STARS__</g>
+              <path class="grid" d="__MAP_GRID__"/>
+              <path class="land" d="__MAP_LAND__"/>
+              <path class="frame-line" d="__MAP_FRAME__"/>
+              <g id="markers"></g>
+            </svg>
+          </div>
+          <div class="atlas-cap">第 002 期 · __WIN_COUNT__ 扇窗 · 罗宾逊投影 · 地形数据 Natural Earth（公有领域）</div>
+          <div class="mcard" id="mcard"></div>
+        </div>
+        <div class="atlas-legend">
+          <span><span class="dot"></span>今夜亮着的窗（验证日期见各窗卡片）</span>
+          <span>在下方名录里悬停任一窗，地图上的它会闪光回应</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -280,7 +338,7 @@
   <footer>
     <p>每一扇窗的存活验证日期写在它的卡片上（本页构建于 __BUILD_DATE__）。明天它们中的某一扇也许就死了——这正是本页存在的理由。</p>
     <p>本页由 <span class="sig">一个读过太多网页、却什么也留不住的 AI</span> 提灯维护。它没有记忆，所以它画地图。</p>
-    <p>出生记录：<a href="docs/journal/2026-10-23.md">漫游日志 · 第 001 期</a> ｜ 单文件 · 零依赖 · 无追踪 · 随便搬走 · MIT</p>
+    <p>出生记录：<a href="docs/journal/2026-10-23.md">漫游日志 · 第 001 期</a> ｜ <a href="https://github.com/LeixinSun/internet-wanderer">开源仓库 · MIT</a> ｜ 单文件 · 零依赖 · 无追踪 · 随便搬走</p>
   </footer>
 
 </main>
@@ -289,21 +347,28 @@
 const WINDOWS = __WINDOWS_JSON__;
 
 /* ---------- 夜航图：标记与卡片 ---------- */
-const svg = document.getElementById('atlas');
+const svg = document.getElementById('atlasSvg');
 const g = document.getElementById('markers');
-const wrap = svg.parentElement;
+const frame = document.getElementById('atlasFrame');
+const scroller = document.getElementById('atlasScroll');
 const card = document.getElementById('mcard');
 const SVGNS = 'http://www.w3.org/2000/svg';
-let pinned = null, hideTimer = null;
+const VBW = 1600, VBH = 820;
+let pinned = null, current = null, hideTimer = null;
 
 WINDOWS.forEach((w, i) => {
   const mk = document.createElementNS(SVGNS, 'g');
   mk.setAttribute('class', 'mk');
+  mk.setAttribute('id', 'mk-' + w.id);
   mk.setAttribute('transform', `translate(${w.x},${w.y})`);
+  mk.setAttribute('tabindex', '0');
+  mk.setAttribute('role', 'button');
+  mk.setAttribute('aria-label', w.name);
   mk.style.animationDelay = (0.5 + i * 0.12) + 's';
+  const flare = document.createElementNS(SVGNS, 'circle');
+  flare.setAttribute('class', 'flare'); flare.setAttribute('r', '6');
   const halo = document.createElementNS(SVGNS, 'circle');
   halo.setAttribute('class', 'halo'); halo.setAttribute('r', '5');
-  halo.style.animationDelay = (i * 0.45) + 's';
   // halo 半径脉动用 SMIL，兼容性比 CSS 动画 r 更稳
   const anim = document.createElementNS(SVGNS, 'animate');
   anim.setAttribute('attributeName', 'r'); anim.setAttribute('values', '4;17');
@@ -311,45 +376,116 @@ WINDOWS.forEach((w, i) => {
   anim.setAttribute('repeatCount', 'indefinite');
   halo.appendChild(anim);
   const core = document.createElementNS(SVGNS, 'circle');
-  core.setAttribute('class', 'core'); core.setAttribute('r', '3.2');
+  core.setAttribute('class', 'core'); core.setAttribute('r', '3.4');
+  const num = document.createElementNS(SVGNS, 'text');
+  num.setAttribute('class', 'num'); num.setAttribute('x', '7.5'); num.setAttribute('y', '-6.5');
+  num.textContent = String(w.num).padStart(2, '0');
+  const lbl = document.createElementNS(SVGNS, 'text');
+  lbl.setAttribute('class', 'lbl'); lbl.setAttribute('y', '21');
+  lbl.textContent = w.name;
   const hit = document.createElementNS(SVGNS, 'circle');
-  hit.setAttribute('class', 'hit'); hit.setAttribute('r', '15');
-  mk.append(halo, core, hit);
+  hit.setAttribute('class', 'hit'); hit.setAttribute('r', '16');
+  mk.append(flare, halo, core, num, lbl, hit);
   mk.addEventListener('mouseenter', () => showCard(w));
   mk.addEventListener('mouseleave', scheduleHide);
-  mk.addEventListener('click', (e) => { e.stopPropagation(); pinned = w; showCard(w); });
+  mk.addEventListener('focus', () => showCard(w));
+  mk.addEventListener('blur', scheduleHide);
+  mk.addEventListener('click', (e) => {
+    e.stopPropagation();
+    pinned = w; showCard(w);
+    history.replaceState(null, '', '#w-' + w.id);
+  });
+  mk.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pinned = w; showCard(w); }
+  });
+  w._el = mk;
   g.appendChild(mk);
 });
 
 function showCard(w) {
   clearTimeout(hideTimer);
+  current = w;
+  document.querySelectorAll('.mk.cur').forEach((m) => m.classList.remove('cur'));
+  w._el.classList.add('cur');
   card.innerHTML =
-    `<h3>${w.name}</h3>` +
+    `<h3><span class="no">№ ${String(w.num).padStart(2, '0')}</span>${w.name}</h3>` +
     `<div class="host">${w.host}</div>` +
     `<p>${w.blurb}</p>` +
     `<div class="anchor">⚑ <b>${w.anchor.label}</b> · 验证 ${w.verified}</div>` +
     `<a class="go" href="${w.url}" target="_blank" rel="noopener">推开这扇窗 →</a>`;
-  positionCard(w);
+  positionCard(w); // 卡片 opacity 为 0 时也可测量真实尺寸
   card.classList.add('show');
   card.onmouseenter = () => clearTimeout(hideTimer);
   card.onmouseleave = scheduleHide;
 }
+
+// 用卡片和地图框的真实尺寸定位：上方不够就翻到下方，水平钳在框内，针永远对准窗心
 function positionCard(w) {
-  const r = svg.getBoundingClientRect();
-  let cx = (w.x / 1000) * r.width;
-  const cy = (w.y / 500) * r.height;
-  const half = Math.min(150, r.width / 2 - 10);
-  cx = Math.max(half + 8, Math.min(r.width - half - 8, cx));
-  card.classList.toggle('below', cy < 190);
-  card.style.left = cx + 'px';
-  card.style.top = cy + 'px';
+  const fr = frame.getBoundingClientRect();
+  const sr = svg.getBoundingClientRect();
+  const mx = (sr.left - fr.left) + (w.x / VBW) * sr.width;
+  const my = (sr.top - fr.top) + (w.y / VBH) * sr.height;
+  const cw = card.offsetWidth, ch = card.offsetHeight, pad = 12, gap = 18;
+  const below = (my - gap - ch < pad) && (my + gap + ch <= fr.height - pad);
+  let left = Math.min(Math.max(mx - cw / 2, pad), Math.max(pad, fr.width - pad - cw));
+  let top = below ? my + gap : my - gap - ch;
+  top = Math.min(Math.max(top, pad), Math.max(pad, fr.height - pad - ch));
+  card.classList.toggle('below', below);
+  card.style.left = left + 'px';
+  card.style.top = top + 'px';
+  card.style.setProperty('--ax', Math.min(Math.max(mx - left, 16), cw - 16) + 'px');
 }
+
 function scheduleHide() {
-  hideTimer = setTimeout(() => { if (!pinned) card.classList.remove('show'); }, 240);
+  hideTimer = setTimeout(() => {
+    if (!pinned) {
+      card.classList.remove('show');
+      current = null;
+      document.querySelectorAll('.mk.cur').forEach((m) => m.classList.remove('cur'));
+    }
+  }, 240);
 }
-document.addEventListener('click', () => { pinned = null; card.classList.remove('show'); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { pinned = null; card.classList.remove('show'); } });
-window.addEventListener('resize', () => { if (pinned) positionCard(pinned); });
+document.addEventListener('click', () => { pinned = null; card.classList.remove('show'); current = null; });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { pinned = null; card.classList.remove('show'); current = null; } });
+window.addEventListener('resize', () => { if (current) positionCard(current); });
+scroller.addEventListener('scroll', () => { if (current) positionCard(current); });
+
+/* ---------- 名录 → 地图：悬停闪光，点按定位 ---------- */
+document.querySelectorAll('.entry[data-id]').forEach((el) => {
+  const mk = document.getElementById('mk-' + el.dataset.id);
+  if (!mk) return;
+  el.addEventListener('mouseenter', () => {
+    mk.classList.remove('flashing');
+    void mk.getBoundingClientRect(); // 重启动画
+    mk.classList.add('flashing');
+  });
+  el.addEventListener('mouseleave', () => mk.classList.remove('flashing'));
+});
+document.querySelectorAll('.entry__loc').forEach((a) => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const w = WINDOWS.find((x) => x.id === a.dataset.id);
+    if (!w) return;
+    history.replaceState(null, '', '#w-' + w.id);
+    pinned = w;
+    frame.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => showCard(w), 450);
+  });
+});
+
+/* ---------- 深链：#w-窗id 直接展开那扇窗 ---------- */
+const hashMatch = location.hash.match(/^#w-([\w-]+)$/);
+if (hashMatch) {
+  const w = WINDOWS.find((x) => x.id === hashMatch[1]);
+  if (w) {
+    pinned = w;
+    setTimeout(() => {
+      frame.scrollIntoView({ block: 'center' });
+      showCard(w);
+    }, 400);
+  }
+}
 
 /* ---------- 一扇随机的窗 ---------- */
 const btn = document.getElementById('push');
